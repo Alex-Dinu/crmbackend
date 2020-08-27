@@ -4,6 +4,7 @@ import com.ceme.crm.controller.CustomerController;
 import com.ceme.crm.entity.CustomerModel;
 import com.ceme.crm.repository.CustomerRepository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.UUID;
 
 // Using JUnit
 @ContextConfiguration
@@ -36,16 +39,46 @@ public class CustomerIntegrationTests {
 
     final String domain = "http://localhost:";
     final String path = "/api/customer";
+    String uri;
+    ResponseEntity<CustomerModel> responseEntityCustomer;
+
+    @BeforeEach
+    void initCustomer(){
+        uri = domain + port + path;
+        System.out.println("before each uri=" + uri);
+        responseEntityCustomer = createNewCustomer(uri);
+    }
 
     @Test
-    public void addCustomer() throws Exception {
-        String uri = domain + port + path;
-        CustomerModel newCustomer = new CustomerModel("James", "Bond", "james.bond@mi6.uk");
+    public void addCustomer() throws Exception {        
+        assertEquals(200, responseEntityCustomer.getStatusCodeValue());
+    }
+
+    @Test
+    public void deleteCustomer(){
+        CustomerModel customer = responseEntityCustomer.getBody();
+        this.restTemplate.delete(uri, customer.getId());
+    }
+
+    @Test
+    public void updateCustomer(){
+        CustomerModel customer = responseEntityCustomer.getBody();
+        customer.setEmailAddress("me@here.com");
+        this.restTemplate.put(uri, customer, CustomerModel.class);
+    }
+
+    private ResponseEntity<CustomerModel> createNewCustomer(String uri) {
+        
+        CustomerModel newCustomer = new CustomerModel(getGuid(), "Bond", "james.bond@mi6.uk");
         System.out.println("uri=" + uri);
         ResponseEntity<CustomerModel> responseEntity = this.restTemplate.postForEntity(uri, newCustomer,
                 CustomerModel.class);
-        assertEquals(200, responseEntity.getStatusCodeValue());
+        return responseEntity;
+    }
 
+    private String getGuid(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 
 }

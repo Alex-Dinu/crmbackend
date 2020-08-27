@@ -42,4 +42,21 @@ public class CustomerController {
         }
 
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void removeCustomer(@PathVariable("id") String id){
+        customerService.deleteCustomer(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<CustomerModel> updateCustomer(@RequestBody CustomerModel customer) {
+        try {
+            CustomerModel updatedCustomer = customerService.updateCustomer(customer);
+            return new ResponseEntity<CustomerModel>(updatedCustomer, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<CustomerModel>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 }
