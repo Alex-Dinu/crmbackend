@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/customer")// set the root path.
 @CrossOrigin // allows requests from all domains
 public class CustomerController {
     @Autowired

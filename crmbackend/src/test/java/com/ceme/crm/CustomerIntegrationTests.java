@@ -28,8 +28,8 @@ public class CustomerIntegrationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @MockBean
-    private CustomerRepository customerRepository;
+    // @MockBean
+    // private CustomerRepository customerRepository;
 
     @Autowired
     CustomerController customerController;
@@ -40,7 +40,7 @@ public class CustomerIntegrationTests {
     @Test
     public void addCustomer() throws Exception {
         String uri = domain + port + path;
-        CustomerModel newCustomer = new CustomerModel("James5", "Bond5", "james5.bond5@mi6.uk");
+        CustomerModel newCustomer = new CustomerModel("James", "Bond", "james.bond@mi6.uk");
         System.out.println("uri=" + uri);
         ResponseEntity<CustomerModel> responseEntity = this.restTemplate.postForEntity(uri, newCustomer,
                 CustomerModel.class);

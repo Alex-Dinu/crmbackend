@@ -21,6 +21,7 @@ public class CustomerService {
         return customerRepository.insert(customer);
     }
 
+    // Add the logic in the service layer and not in the controller.
     public CustomerModel getCustomerById(String id) throws CustomerNotFoundException {
         CustomerModel foundCustomer = customerRepository.findById(new ObjectId(id)).get();
         if (foundCustomer.getId() == null) {
