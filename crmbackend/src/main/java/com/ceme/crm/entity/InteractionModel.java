@@ -1,5 +1,7 @@
 package com.ceme.crm.entity;
 
+import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,24 +11,24 @@ public class InteractionModel {
     @Id
     private ObjectId id;
     private String customerID;
-    private String dateTime;
+    private Date dateCreated;
     private String comments;
 
     public InteractionModel() {
     }
 
-    public InteractionModel(String customerID, String dateTime, String comments) {
+    public InteractionModel(String customerID, Date dateCreated, String comments) {
         this.customerID = customerID;
-        this.dateTime = dateTime;
+        this.dateCreated = dateCreated;
         this.comments = comments;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public Date getDateTime() {
+        return dateCreated;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(Date dateTime) {
+        this.dateCreated = dateTime;
     }
 
     public String getComments() {
@@ -37,9 +39,9 @@ public class InteractionModel {
         this.comments = comments;
     }
 
-	public Object get() {
-		return null;
-	}
+    public Object get() {
+        return null;
+    }
 
     public ObjectId getId() {
         return id;
@@ -56,5 +58,5 @@ public class InteractionModel {
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
-    
+
 }
