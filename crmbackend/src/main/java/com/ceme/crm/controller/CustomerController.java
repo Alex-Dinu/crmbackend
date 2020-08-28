@@ -14,12 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @RestController
-@RequestMapping("/api/customer")// set the root path.
+@RequestMapping("/api/customer") // set the root path.
 @CrossOrigin // allows requests from all domains
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+
+    @Operation(summary = "Get a customer by Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Customer was found.", content = {
+                    @Content(mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", description = "Customer was not found.", content = @Content) })
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<CustomerModel> getCustomerById(@PathVariable("id") String id) {
@@ -44,7 +57,7 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void removeCustomer(@PathVariable("id") String id){
+    public void removeCustomer(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
     }
 

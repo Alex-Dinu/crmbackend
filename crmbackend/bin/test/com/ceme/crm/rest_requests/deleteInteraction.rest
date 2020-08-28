@@ -1,2 +1,2 @@
-DELETE http://localhost:8080/api/interaction/5f49468aec717a21896059e5 HTTP/1.1
+DELETE http://localhost:8080/api/interaction/5f495556f4f3b155bddfa5cb HTTP/1.1
 content-type: application/json

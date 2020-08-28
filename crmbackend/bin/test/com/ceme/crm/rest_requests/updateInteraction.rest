@@ -1,9 +1,8 @@
-PUT http://localhost:8080/api/interaction/5f4946deec717a21896059e4 HTTP/1.1
+PUT http://localhost:8080/api/interaction HTTP/1.1
 content-type: application/json
 
- {
-  "id": "5f4946deec717a21896059e4",
-   
-  "comments": "updated Comments",
-  
+{
+  "id": "5f495556f4f3b155bddfa5cb",
+  "customerId": "5f47f42cc26834083c2efbba",
+  "comments": "My updated Comments"
 }

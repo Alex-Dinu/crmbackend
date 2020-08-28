@@ -30,11 +30,13 @@ public class InteractionService {
     }
 
     public InteractionModel updateInteraction(InteractionModel interaction) {
+        interaction.setDateTime(new Date());
         return interactionRepository.save(interaction);
     }
 
     public List<InteractionModel> findInterationForCustomerId(String customerId) throws InteractionsNotFoundException {
-        List<InteractionModel> interactions = interactionRepository.findByCustomerId(customerId);
+        List<InteractionModel> interactions = (List<InteractionModel>) interactionRepository
+                .findByCustomerId(customerId);
         if (interactions != null && interactions.size() == 0) {
             throw new InteractionsNotFoundException("Interractions Not found .");
         }
