@@ -1,7 +1,9 @@
 package com.ceme.crm.controller;
 
+import java.util.List;
+
 import com.ceme.crm.customExceptions.CustomerNotFoundException;
-import com.ceme.crm.customExceptions.InteractionNotFoundException;
+import com.ceme.crm.customExceptions.InteractionsNotFoundException;
 import com.ceme.crm.entity.InteractionModel;
 import com.ceme.crm.service.InteractionService;
 
@@ -22,37 +24,37 @@ public class InteractionController {
     @Autowired
     private InteractionService interactionService;    
     @RequestMapping(method = RequestMethod.GET, value = "/{customerId}")
-    public ResponseEntity<InteractionModel> getUserId(@PathVariable("customerId") String userId) {
+    public ResponseEntity<List<InteractionModel>> getInteractionsByCustomerId(@PathVariable("customerId") String customerId) {
         try {
-            return new ResponseEntity<InteractionModel>(interactionService.getUserId(userId), HttpStatus.OK);
-        } catch (InteractionNotFoundException e) {
-            return new ResponseEntity<InteractionModel>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<InteractionModel>>(interactionService.findInterationForCustomerId(customerId), HttpStatus.OK);
+        } catch (InteractionsNotFoundException e) {
+            return new ResponseEntity<List<InteractionModel>>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-            return new ResponseEntity<InteractionModel>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<InteractionModel>>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<InteractionModel> addComments(@RequestBody InteractionModel newComments) {
+    public ResponseEntity<InteractionModel> insertInteraction(@RequestBody InteractionModel interaction) {
         try {
-            InteractionModel addedComments = interactionService.addComments(newComments);
-            return new ResponseEntity<InteractionModel>(addedComments, HttpStatus.OK);
+            InteractionModel addedInteraction = interactionService.insertInteraction(interaction);
+            return new ResponseEntity<InteractionModel>(addedInteraction, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<InteractionModel>(HttpStatus.BAD_REQUEST);
         }
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
-    public void removeComments(@PathVariable("userId") String userId){
-        interactionService.deleteComments(userId);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{interactionId}")
+    public void deleteInteraction(@PathVariable("interactionId") String interactionId){
+        interactionService.deleteInteraction(interactionId);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<InteractionModel> updateCustomer(@RequestBody InteractionModel comments) {
+    public ResponseEntity<InteractionModel> updateInteraction(@RequestBody InteractionModel interaction) {
         try {
-            InteractionModel updatedComments = interactionService.updateComments(comments);
-            return new ResponseEntity<InteractionModel>(updatedComments, HttpStatus.OK);
+            InteractionModel updatedInteraction = interactionService.updateInteraction(interaction);
+            return new ResponseEntity<InteractionModel>(updatedInteraction, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<InteractionModel>(HttpStatus.BAD_REQUEST);
         }

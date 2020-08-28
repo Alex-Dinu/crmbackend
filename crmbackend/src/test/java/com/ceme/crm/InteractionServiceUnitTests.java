@@ -1,13 +1,18 @@
 package com.ceme.crm;
 
-import com.ceme.crm.customExceptions.InteractionNotFoundException;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+
+import com.ceme.crm.customExceptions.InteractionsNotFoundException;
 import com.ceme.crm.entity.InteractionModel;
 import com.ceme.crm.repository.InteractionRepository;
 import com.ceme.crm.service.InteractionService;
-import com.mongodb.assertions.Assertions;
 
 import org.bson.types.ObjectId;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.Mock;
 
 public class InteractionServiceUnitTests {
@@ -18,15 +23,15 @@ public class InteractionServiceUnitTests {
     ObjectId id;
 
     @Test
-    public void ThrowUserNotFoundTest() {
+    public void WhenNoInteractionAreFound_ExpectInteractionsNotFoundException() {
         InteractionService interactionService = new InteractionService(interactionRepositoryMock);
-       
-        when(interactionRepositoryMock.findByUserId(new ObjectId("5a46dd050075914ded6e5c8r")).get())
-                .thenReturn(new InteractionModel());
 
-        Assertions.assertThrows(InteractionNotFoundException.class, () -> {
+        when(interactionRepositoryMock.findInterationsForCustomerId(new ObjectId("5f46dd050075914ded6e5c8a")))
+                .thenReturn(new ArrayList<InteractionModel>());
 
-            interactionService.getUserId(anyString());
+        Assertions.assertThrows(InteractionsNotFoundException.class, () -> {
+
+            interactionService.findInterationForCustomerId(anyString());
         });
 
     }

@@ -27,7 +27,7 @@ public class CustomerServiceUnitTests {
         CustomerService customerService = new CustomerService(customerRepositoryMock);
         // when(customerRepositoryMock.findById(new
         // ObjectId(anyString())).get()).thenReturn(new CustomerModel());
-        when(customerRepositoryMock.findById(new ObjectId("5f46dd050075914ded6e5c8r")).get())
+        when(customerRepositoryMock.findById(new ObjectId("5f47f42cc26834083c2efbba")).get())
                 .thenReturn(new CustomerModel());
 
         Assertions.assertThrows(CustomerNotFoundException.class, () -> {

@@ -2,7 +2,7 @@ package com.ceme.crm.service;
 
 import java.util.List;
 
-import com.ceme.crm.customExceptions.InteractionNotFoundException;
+import com.ceme.crm.customExceptions.InteractionsNotFoundException;
 import com.ceme.crm.entity.InteractionModel;
 import com.ceme.crm.repository.InteractionRepository;
 
@@ -18,23 +18,23 @@ public class InteractionService {
         this.interactionRepository = interactionRepository;
     }
     
-    public InteractionModel addComments(InteractionModel comments) {
-        return interactionRepository.insert(comments);
+    public InteractionModel insertInteraction(InteractionModel interaction) {
+        return interactionRepository.insert(interaction);
     }
 
-    public void deleteComments(String userId) {
-        interactionRepository.deleteById(new ObjectId(userId));
+    public void deleteInteraction(String interactionId) {
+        interactionRepository.deleteById(new ObjectId(interactionId));
     }
 
-    public InteractionModel updateComments(InteractionModel comments) {
-        return interactionRepository.save(comments);
+    public InteractionModel updateInteraction(InteractionModel interaction) {
+        return interactionRepository.save(interaction);
     }
 
 
-     public List< InteractionModel> findInterationForCustomerId(String customerId) throws InteractionNotFoundException {
-        List <InteractionModel> interactions = interactionRepository.findInterationsForCustomerId(customerId);
+     public List< InteractionModel> findInterationForCustomerId(String customerId) throws InteractionsNotFoundException {
+        List <InteractionModel> interactions = interactionRepository.findInterationsForCustomerId(new ObjectId(customerId));
         if (interactions != null && interactions.size() == 0) {
-            throw new InteractionNotFoundException("Interractions Not found .");
+            throw new InteractionsNotFoundException("Interractions Not found .");
         }
         return interactions;
 
