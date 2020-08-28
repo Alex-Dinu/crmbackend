@@ -18,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/interaction")// set the root path.
+@RequestMapping("/api/interaction") // set the root path.
 @CrossOrigin // allows requests from all domains
 public class InteractionController {
     @Autowired
-    private InteractionService interactionService;    
+    private InteractionService interactionService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/{customerId}")
-    public ResponseEntity<List<InteractionModel>> getInteractionsByCustomerId(@PathVariable("customerId") String customerId) {
+    public ResponseEntity<List<InteractionModel>> findByCustomerID(@PathVariable("customerId") String customerId) {
         try {
-            return new ResponseEntity<List<InteractionModel>>(interactionService.findInterationForCustomerId(customerId), HttpStatus.OK);
+            return new ResponseEntity<List<InteractionModel>>(
+                    interactionService.findInterationForCustomerId(customerId), HttpStatus.OK);
         } catch (InteractionsNotFoundException e) {
             return new ResponseEntity<List<InteractionModel>>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -46,7 +48,7 @@ public class InteractionController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{interactionId}")
-    public void deleteInteraction(@PathVariable("interactionId") String interactionId){
+    public void deleteInteraction(@PathVariable("interactionId") String interactionId) {
         interactionService.deleteInteraction(interactionId);
     }
 

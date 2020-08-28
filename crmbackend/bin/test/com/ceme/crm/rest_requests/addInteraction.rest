@@ -3,6 +3,5 @@ content-type: application/json
 
 {
     "customerId":"5f47f42cc26834083c2efbba",
-    "dateCreated": "12/08/2020 10:55:00",
     "comments": "My Comments"
 }

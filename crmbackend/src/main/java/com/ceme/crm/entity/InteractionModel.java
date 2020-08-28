@@ -6,25 +6,25 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "comments") // The collection name in Mongo
+@Document(collection = "interactions") // The collection name in Mongo
 public class InteractionModel {
     @Id
     private ObjectId id;
-    private String customerID;
+    private String customerId;
     private Date dateCreated;
     private String comments;
 
     public InteractionModel() {
     }
 
-    public InteractionModel(String customerID, Date dateCreated, String comments) {
-        this.customerID = customerID;
-        this.dateCreated = dateCreated;
+    public InteractionModel(String customerId, String comments) {
+        this.customerId = customerId;
+        this.dateCreated = new Date();
         this.comments = comments;
     }
 
-    public Date getDateTime() {
-        return dateCreated;
+    public String getDateTime() {
+        return dateCreated.toString();
     }
 
     public void setDateTime(Date dateTime) {
@@ -39,24 +39,24 @@ public class InteractionModel {
         this.comments = comments;
     }
 
-    public Object get() {
-        return null;
-    }
+    // public Object get() {
+    // return null;
+    // }
 
-    public ObjectId getId() {
-        return id;
+    public String getId() {
+        return id.toString();
     }
 
     public void setId(ObjectId id) {
         this.id = id;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
 }

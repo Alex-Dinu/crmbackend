@@ -1,5 +1,6 @@
 package com.ceme.crm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ceme.crm.customExceptions.InteractionsNotFoundException;
@@ -14,11 +15,13 @@ import org.bson.types.ObjectId;
 public class InteractionService {
     @Autowired
     private InteractionRepository interactionRepository;
-    public InteractionService(InteractionRepository interactionRepository){
+
+    public InteractionService(InteractionRepository interactionRepository) {
         this.interactionRepository = interactionRepository;
     }
-    
+
     public InteractionModel insertInteraction(InteractionModel interaction) {
+        interaction.setDateTime(new Date());
         return interactionRepository.insert(interaction);
     }
 
@@ -30,9 +33,8 @@ public class InteractionService {
         return interactionRepository.save(interaction);
     }
 
-
-     public List< InteractionModel> findInterationForCustomerId(String customerId) throws InteractionsNotFoundException {
-        List <InteractionModel> interactions = interactionRepository.findInterationsForCustomerId(new ObjectId(customerId));
+    public List<InteractionModel> findInterationForCustomerId(String customerId) throws InteractionsNotFoundException {
+        List<InteractionModel> interactions = interactionRepository.findByCustomerId(customerId);
         if (interactions != null && interactions.size() == 0) {
             throw new InteractionsNotFoundException("Interractions Not found .");
         }
