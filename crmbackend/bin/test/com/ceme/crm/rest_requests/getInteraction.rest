@@ -1,0 +1,4 @@
+GET  http://localhost:8080/api/interaction/5f49455bec717a21896059e4 HTTP/1.1
+content-type: application/json
+
+ 
