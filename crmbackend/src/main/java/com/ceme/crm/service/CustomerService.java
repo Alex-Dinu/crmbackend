@@ -7,6 +7,7 @@ import com.ceme.crm.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.bson.types.ObjectId;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -29,6 +30,11 @@ public class CustomerService {
         }
         return foundCustomer;
 
+    }
+
+    public List<CustomerModel> getCustomers() {
+        List<CustomerModel> customers = customerRepository.findAll();
+        return customers;
     }
 
     public void deleteCustomer(String id) {
