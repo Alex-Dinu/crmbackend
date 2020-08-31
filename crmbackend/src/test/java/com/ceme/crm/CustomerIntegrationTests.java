@@ -31,6 +31,8 @@ public class CustomerIntegrationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private CustomerRepository customerRepository;
     // @MockBean
     // private CustomerRepository customerRepository;
 
@@ -43,32 +45,32 @@ public class CustomerIntegrationTests {
     ResponseEntity<CustomerModel> responseEntityCustomer;
 
     @BeforeEach
-    void initCustomer(){
+    void initCustomer() {
         uri = domain + port + path;
         System.out.println("before each uri=" + uri);
         responseEntityCustomer = createNewCustomer(uri);
     }
 
     @Test
-    public void addCustomer() throws Exception {        
+    public void addCustomer() throws Exception {
         assertEquals(200, responseEntityCustomer.getStatusCodeValue());
     }
 
     @Test
-    public void deleteCustomer(){
+    public void deleteCustomer() {
         CustomerModel customer = responseEntityCustomer.getBody();
         this.restTemplate.delete(uri, customer.getId());
     }
 
     @Test
-    public void updateCustomer(){
+    public void updateCustomer() {
         CustomerModel customer = responseEntityCustomer.getBody();
         customer.setEmailAddress("me@here.com");
         this.restTemplate.put(uri, customer, CustomerModel.class);
     }
 
     private ResponseEntity<CustomerModel> createNewCustomer(String uri) {
-        
+
         CustomerModel newCustomer = new CustomerModel(getGuid(), "Bond", "james.bond@mi6.uk");
         System.out.println("uri=" + uri);
         ResponseEntity<CustomerModel> responseEntity = this.restTemplate.postForEntity(uri, newCustomer,
@@ -76,9 +78,28 @@ public class CustomerIntegrationTests {
         return responseEntity;
     }
 
-    private String getGuid(){
+    private String getGuid() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
+    }
+
+    @Test
+    public void addCustomers() throws Exception {
+
+        customerRepository.deleteAll();
+        CustomerModel newCustomer;
+        newCustomer = new CustomerModel("James", "Bond", "james.bond@mi6.uk");
+        customerRepository.insert(newCustomer);
+
+        newCustomer = new CustomerModel("Audie", "Murphy", "audie.murphy@ww2.com");
+        customerRepository.insert(newCustomer);
+
+        newCustomer = new CustomerModel("Ada", "Lovelace", "ada.lopvelace@oop.com");
+        customerRepository.insert(newCustomer);
+
+        newCustomer = new CustomerModel("Rogers", "Nelson", "Rogers.Nelsony@Paisley.com");
+        customerRepository.insert(newCustomer);
+
     }
 
 }

@@ -1,7 +1,11 @@
 package com.ceme.crm;
 
+import com.ceme.crm.repository.CustomerRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -15,5 +19,7 @@ public class CrmApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrmApplication.class, args);
 	}
+
+
 
 }
