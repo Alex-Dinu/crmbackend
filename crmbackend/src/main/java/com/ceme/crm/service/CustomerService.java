@@ -3,6 +3,8 @@ package com.ceme.crm.service;
 import com.ceme.crm.customExceptions.CustomerNotFoundException;
 import com.ceme.crm.entity.CustomerModel;
 import com.ceme.crm.repository.CustomerRepository;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,11 @@ public class CustomerService {
 
     public List<CustomerModel> getCustomers() {
         List<CustomerModel> customers = customerRepository.findAll();
+        return customers;
+    }
+
+    public List<CustomerModel> getCustomersByEmail(String searchString) {
+        List<CustomerModel> customers = customerRepository.findCustomersByEmail(searchString);
         return customers;
     }
 
