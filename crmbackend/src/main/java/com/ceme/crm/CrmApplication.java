@@ -1,8 +1,15 @@
 package com.ceme.crm;
 
+import com.ceme.crm.entity.CustomerModel;
+import com.ceme.crm.entity.InteractionModel;
+import com.ceme.crm.repository.CustomerRepository;
+import com.ceme.crm.repository.InteractionRepository;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -12,6 +19,12 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 @EnableMongoRepositories(basePackages = "com.ceme.crm.repository")
 @OpenAPIDefinition // http://localhost:8080/swagger-ui.html
 public class CrmApplication {
+
+	@Autowired
+	private InteractionRepository interactionRepository;
+
+	@Autowired
+	private CustomerRepository customerRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrmApplication.class, args);
@@ -45,7 +58,7 @@ public class CrmApplication {
 				.append("'----------------'  '----------------'  '----------------'")
 				.append(System.getProperty("line.separator"));
 
-		System.out.println(message.toString());
+		System.out.println("\u001B[32m" + message.toString() + "\u001B[0m");
 
 	}
 }
