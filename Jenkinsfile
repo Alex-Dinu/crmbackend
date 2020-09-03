@@ -15,7 +15,7 @@ pipeline {
                     excludes: '',
                     flattenFiles: false,
                     includes: 'crmbackend\\build\\libs\\**',
-                    targetLocation: "C:\\CRM\\UX"
+                    targetLocation: "C:\\CRM\\Backend"
                 )])
                
             }
