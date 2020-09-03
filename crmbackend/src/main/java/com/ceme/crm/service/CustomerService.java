@@ -3,8 +3,7 @@ package com.ceme.crm.service;
 import com.ceme.crm.customExceptions.CustomerNotFoundException;
 import com.ceme.crm.entity.CustomerModel;
 import com.ceme.crm.repository.CustomerRepository;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

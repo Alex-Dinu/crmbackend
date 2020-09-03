@@ -1,18 +1,9 @@
 package com.ceme.crm;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-
-import com.ceme.crm.customExceptions.InteractionsNotFoundException;
-import com.ceme.crm.entity.InteractionModel;
 import com.ceme.crm.repository.InteractionRepository;
-import com.ceme.crm.service.InteractionService;
 
 import org.bson.types.ObjectId;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+
 import org.mockito.Mock;
 
 public class InteractionServiceUnitTests {
