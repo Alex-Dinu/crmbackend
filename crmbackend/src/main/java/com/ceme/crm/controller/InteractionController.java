@@ -27,9 +27,9 @@ public class InteractionController {
     @RequestMapping(method = RequestMethod.GET, value = "/{customerId}")
     public ResponseEntity<List<InteractionModel>> findByCustomerID(@PathVariable("customerId") String customerId) {
         try {
-            List<InteractionModel> customnerInteractions = interactionService.findInterationForCustomerId(customerId);
+            List<InteractionModel> customerInteractions = interactionService.findInterationForCustomerId(customerId);
             return new ResponseEntity<List<InteractionModel>>(
-                    interactionService.findInterationForCustomerId(customerId), HttpStatus.OK);
+                customerInteractions, HttpStatus.OK);
         } catch (InteractionsNotFoundException e) {
             return new ResponseEntity<List<InteractionModel>>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
