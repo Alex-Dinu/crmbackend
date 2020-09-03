@@ -14,7 +14,7 @@ pipeline {
                 fileOperations([fileCopyOperation(
                     excludes: '',
                     flattenFiles: false,
-                    includes: 'build\\libs\\**',
+                    includes: 'crmbackend\\build\\libs\\**',
                     targetLocation: "C:\\CRM\\UX"
                 )])
                
