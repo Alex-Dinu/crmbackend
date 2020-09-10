@@ -25,6 +25,11 @@ dependencies {
 	testCompile "org.mockito:mockito-core:2.+" 
 	testCompile "org.springframework.boot:spring-boot-starter-test"
 	implementation "org.springdoc:springdoc-openapi-ui:1.4.4"
+
+	implementation 'org.springframework.boot:spring-boot-starter-integration'
+	compile "org.springframework.integration:spring-integration-jms:5.3.2.RELEASE"
+	compile "org.apache.activemq:activemq-broker"
+	compile "javax.jms:javax.jms-api:2.0.1"
 }
 
 test {

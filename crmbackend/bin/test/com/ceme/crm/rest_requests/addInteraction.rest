@@ -2,7 +2,7 @@ POST http://localhost:8080/api/interaction HTTP/1.1
 content-type: application/json
 
 {
-    "customerId":"5f47f42cc26834083c2efbba",
+    "customerId":"5f5a4a03ff83a7652e0cbfd9",
     "comments": "My Comments"
 }
 

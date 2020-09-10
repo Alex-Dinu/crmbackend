@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.ceme.crm.customExceptions.InteractionsNotFoundException;
 import com.ceme.crm.entity.InteractionModel;
+import com.ceme.crm.messaging.service.InteractionReceiver;
+import com.ceme.crm.messaging.service.InteractionSender;
 import com.ceme.crm.service.InteractionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class InteractionController {
     @Autowired
     private InteractionService interactionService;
 
+    @Autowired
+    private InteractionSender interactionSenderService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/{customerId}")
     public ResponseEntity<List<InteractionModel>> findByCustomerID(@PathVariable("customerId") String customerId) {
         try {
@@ -39,7 +44,8 @@ public class InteractionController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<InteractionModel> insertInteraction(@RequestBody InteractionModel interaction) {
         try {
-            InteractionModel addedInteraction = interactionService.insertInteraction(interaction);
+            InteractionModel addedInteraction = interactionSenderService.addInteractionRecord(interaction);
+            //InteractionModel addedInteraction = interactionService.insertInteraction(interaction);
             return new ResponseEntity<InteractionModel>(addedInteraction, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<InteractionModel>(HttpStatus.BAD_REQUEST);
